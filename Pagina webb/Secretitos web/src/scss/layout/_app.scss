@@ -1,0 +1,54 @@
+// Seccion de informacion
+.info {
+  padding: 100px 0; // Relleno vertical
+  position: relative; // Para elementos hijos posicionados
+
+  // Contenido interno de la seccion info
+  &-content {
+    display: flex; // Flex para organizar elementos
+    align-items: center; // Centrar verticalmente
+    gap: 50px; // Espacio entre elementos
+    flex-wrap: wrap; // Permite que los elementos bajen de linea
+    max-width: 1100px; // Maximo ancho
+    margin: 0 auto; // Centrar horizontal
+    justify-content: center; // Centrar elementos
+    text-align: center; // Centrar texto
+  }
+
+  // Contenedor de imagen
+  .info-img {
+    display: flex;
+    justify-content: center; // Centrar imagen horizontalmente
+    img {
+      width: 450px; // Ancho de la imagen
+      border-radius: 20px; // Bordes redondeados
+      @include box-shadow(0px 6px 20px rgba(0,0,0,0.4)); // Sombra de la imagen
+      margin: 0 auto; // Centrar
+      animation: fadeIn 1s ease-in; // Animacion de entrada
+    }
+  }
+
+  // Texto de informacion
+  .info-txt { width: 50%; } // Ocupa la mitad del ancho
+}
+
+// Seccion de app
+.app {
+  padding: 30px 0; // Relleno vertical
+  display: flex; // Flex para organizar elementos
+  align-items: center; // Centrar verticalmente
+
+  .app-txt { width: 50%; } // Texto ocupa mitad del ancho
+  .descarga {
+    display: flex; // Flex para botones de descarga
+    img { width: 150px; } // Ancho de imagen de descarga
+  }
+  .app-img { width: 50%; text-align: center; } // Contenedor de imagen
+  .app-img img { width: 450px; } // Imagen de app
+}
+
+// Animacion fadeIn
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);} // Inicio invisible y abajo
+  to {opacity: 1; transform: translateY(0);} // Final visible y posicion original
+}

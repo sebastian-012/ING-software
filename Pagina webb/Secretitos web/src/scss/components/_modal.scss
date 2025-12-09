@@ -1,0 +1,81 @@
+// Contenedor general del modal
+.contenedor {
+  display: none; // Oculto por defecto
+  position: fixed; // Posicion fija respecto a la ventana
+  top: 0; left: 0; // Arriba a la izquierda
+  width: 100%; height: 100%; // Ocupa toda la pantalla
+  background: rgba(0,0,0,0.6); // Fondo semitransparente
+  display: flex; // Flex para centrar contenido
+  justify-content: center; // Centrar horizontal
+  align-items: center; // Centrar vertical
+  z-index: 2000; // Encima de otros elementos
+}
+
+// Contenido interno del modal
+.modal-content {
+  background: $color-white; // Fondo blanco
+  width: 350px; // Ancho fijo
+  max-width: 90%; // Maximo ancho relativo a pantalla
+  padding: 30px; // Relleno interno
+  border-radius: 12px; // Bordes redondeados
+  @include box-shadow($shadow-medium); // Sombra media
+  text-align: center; // Centrar texto
+  position: relative; // Para posicionar elementos hijos
+
+  h2 { margin: 5px 0 20px; } // Titulo del modal
+
+  // Campos de entrada
+  input {
+    width: 100%; // Ancho completo
+    padding: 10px; // Relleno interno
+    margin: 7px 0 15px; // Margen vertical
+    border: 1px solid #d7b090; // Borde
+    border-radius: $radius-small; // Bordes redondeados
+    padding-right: 40px; // Espacio para iconos
+  }
+
+  // Boton de accion
+  button {
+    width: 100%; // Ancho completo
+    padding: 12px; // Relleno
+    border: 1px solid black; // Borde negro
+    background: $color-pink; // Fondo rosa
+    color: $color-white; // Texto blanco
+    font-weight: bold; // Negrita
+    border-radius: $radius-xl; // Bordes redondeados
+    margin-top: 10px; // Margen superior
+    cursor: pointer; // Cursor puntero
+
+    &:hover {
+      background: #d7b090; // Fondo al pasar mouse
+      @include box-shadow(0 0 8px rgba(173,15,15,0.1)); // Sombra ligera
+    }
+  }
+
+  // Boton de cerrar modal
+  .cerrar {
+    position: absolute; // Posicion absoluta
+    top: 10px; right: 15px; // Arriba derecha
+    font-size: 22px; // Tamaño de fuente
+    font-weight: bold; // Negrita
+    cursor: pointer; // Cursor puntero
+  }
+
+  .passBox { position: relative; } // Contenedor relativo para icono de ojo
+
+  // Icono para mostrar/ocultar contraseña
+  .ojo {
+    position: absolute; // Posicion absoluta
+    right: 10px; // Derecha
+    top: 50%; // Centrado vertical
+    transform: translateY(-50%); // Ajuste vertical exacto
+    cursor: pointer; // Cursor puntero
+    font-size: 18px; // Tamaño de fuente
+    user-select: none; // No seleccionar texto
+  }
+
+  // Mensajes de error o exito
+  .error { color: red; font-size: 12px; margin-bottom: 10px; text-align: center; } // Error general
+  .success { color: green; font-size: 12px; margin-bottom: 10px; text-align: center; } // Mensaje de exito
+  .miniError { color: rgb(248,12,12); font-size: 12px; margin: -10px 0 5px; } // Error pequeno
+}

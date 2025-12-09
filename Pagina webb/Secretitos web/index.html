@@ -1,0 +1,446 @@
+        <!DOCTYPE html>
+        <html lang="es">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Pagina Web de una Pasteleria</title>
+            <link rel="stylesheet" href="src/css/styles.css">
+        </head>
+
+        <body>
+            <!-- Alfonso -->
+            <header class="header">
+                <img class="bg" src="src/assets/bg.png" alt="">
+                <div class="menu container">
+
+                    <a href="#" class="logo">
+                        <img src="src/assets/LogoPasteleria.PNG" alt="Logo Pastelería" class="logo-img">
+                    </a>
+
+                    <input type="checkbox" id="menu">
+                    <label for="menu">
+                        <img src="src/assets/menu.png" class="menu-icono" alt="menu">
+                    </label>
+
+                    <nav class="navbar">
+                        <ul class="nav-list">
+                            <li class="nav-item active"><a href="#" class="nav-link"><span class="nav-ico">🏠</span><span class="nav-txt">Inicio</span></a></li>
+                            <li class="nav-item"><a href="#" class="nav-link"><span class="nav-ico">🧁</span><span class="nav-txt">Servicios</span></a></li>
+                            <li class="nav-item"><a href="#" class="nav-link"><span class="nav-ico">🛍️</span><span class="nav-txt">Producto</span></a></li>
+                            <li class="nav-item"><a href="#" class="nav-link"><span class="nav-ico">📞</span><span class="nav-txt">Contacto</span></a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- Información del usuario -->
+                    <div id="user-info" style="display:none; align-items:center; gap:10px; color:#fff; font-weight:bold;">
+                        <span id="welcome-msg"></span>
+                        <button id="logout-btn" style="padding:5px 10px; border:none; border-radius:5px; background:#d7005f; color:#fff; cursor:pointer;">Cerrar Sesión</button>
+                    </div>
+
+                    <!-- Botón para abrir login -->
+                    <button onclick="mostrarLogin()" class="btnAbrir">Iniciar Sesión</button>
+
+                    <!-- Carrito -->
+                    <ul>
+                        <li class="submenu">
+                            <div class="cart-wrapper">
+                                <img src="src/assets/car.svg" id="img-carrito" alt="carrito">
+                                <span id="cart-count" class="cart-count">0</span>
+                            </div>
+                            <div id="carrito" class="cart-card">
+                                <div class="cart-header">
+                                    <h3>Mi Carrito</h3>
+                                </div>
+                                <div class="cart-body">
+                                    <table id="lista-carrito">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>Nombre</th>
+                                                <th>Descripción</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Importe</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="cart-footer">
+                                    <div class="cart-total">Total: <span id="cart-total">$0.00</span></div>
+                                    <a href="#" id="vaciar-carrito" class="btn-3 vaciar-large">Vaciar Carrito</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div> <!-- FIN .menu -->
+
+                <div class="header-content container">
+                    <div class="header-txt">
+
+                        <h1><span>Bienvenido </span>disfruta de nuestros platillos</h1>
+
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate corporis a laborum quos,
+                            sint, ut natus error aut cumque magnam ipsam iure nesciunt iste facilis, rerum iusto inventore
+                            reprehenderit quas.
+                        </p>
+
+                        <div class="actions">
+                            <a href="#" class="btn-1">Informacion</a>
+
+                            <!-- Buscador -->
+                            <form class="search-container" onsubmit="return false;">
+                                <input type="text" id="search" placeholder="Buscar torta...">
+                                <div id="suggestions" class="suggestions"></div>
+                            </form>
+                        </div>
+
+                    </div>
+        
+                    <div class="header-img">
+                        <img src="src/assets/sel_sf.png" alt="">
+                    </div>
+
+                </div>
+
+            </header>
+
+        <!-- sebastian -->
+            <!-- FORMULARIO LOGIN (MOVIDO FUERA DEL HEADER) -->
+            <div class="contenedor" id="login">
+                <div class="modal-content">
+                    <span class="cerrar" onclick="cerrarForm()">×</span>
+                    <h2 class="sesion">Iniciar Sesión</h2>
+                    <form onsubmit="return validarLogin()">
+                        <label for="loginUsuario"><!-- Usuario o correo * --></label>
+                        <input type="text" id="loginUsuario" placeholder="Ingrese su usuario o correo">
+
+                        <label for="loginPass"><!-- Contraseña * --></label>
+                        <div class="passBox">
+                            <input type="password" id="loginPass" placeholder="Ingrese su contraseña">
+                            <span class="ojo" onclick="verPass('loginPass')">&#128065;</span>
+                        </div>
+
+                        <p id="errorLogin" class="error"></p>
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    <p>¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Regístrate</a></p>
+                </div>
+            </div>
+
+            <!-- FORMULARIO REGISTRO (MOVIDO FUERA DEL HEADER) -->
+            <div class="contenedor" id="registro">
+                <div class="modal-content">
+                    <span class="cerrar" onclick="cerrarForm()">×</span>
+                    <h2>Registro</h2>
+                    <form onsubmit="return validarRegistro()">
+
+                        <label for="regEmail"><!-- Correo electrónico * --></label>
+                        <input type="email" id="regEmail" placeholder="Ingrese su correo">
+                        <p id="msgEmail" class="miniError"></p>
+
+                        <label for="regUser"><!-- Nombre de usuario * --></label>
+                        <input type="text" id="regUser" placeholder="Ingrese su usuario">
+
+                        <label for="regPass"><!-- Contraseña * --></label>
+                        <div class="passBox">
+                            <input type="password" id="regPass" placeholder="Ingrese su contraseña">
+                            <span class="ojo" onclick="verPass('regPass')">&#128065;</span>
+                        </div>
+
+                        <label for="regPass2"><!-- Confirmar contraseña * --></label>
+                        <div class="passBox">
+                            <input type="password" id="regPass2" placeholder="Repita su contraseña">
+                            <span class="ojo" onclick="verPass('regPass2')">&#128065;</span>
+                        </div>
+
+                        <p id="errorRegistro" class="error"></p>
+                        <button type="submit">Registrarse</button>
+                    </form>
+                    <p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Inicia sesión</a></p>
+                </div>
+            </div>
+
+
+        <!-- alonso -->
+            <!-- DESAYUNOS -->
+            <section class="breakfast container">
+                <h2>Ven y disfruta los mejores sabores de Puerto Maldonado!</h2>
+                <p>Horario 8 am - 8 pm</p>
+
+                <div class="breakfast-content">
+                    <div class="breakfast-card">
+                        <img src="src/assets/imagen1.jpeg" alt="">
+                        <h3>Personalizado</h3>
+                    </div>
+
+                    <div class="breakfast-card">
+                        <img src="src/assets/imagen2.jpeg" alt="">
+                        <h3>Tortas</h3>
+                    </div>
+
+                    <div class="breakfast-card">
+                        <img src="src/assets/imagen3.jpeg" alt="">
+                        <h3>Postres</h3>
+                    </div>
+
+                    <div class="breakfast-card">
+                        <img src="src/assets/imagen4.jpeg" alt="">
+                        <h3>Bebidas</h3>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- INFO -->
+            <section class="info">
+                <img class="bg-2" src="src/assets/bg-2.png" alt="">
+
+                <div class="info-content container">
+                    <div class="info-img slider-container">
+                        <img src="src/assets/imagen3.jpeg" class="slide active" alt="Pastel destacado">
+                        <img src="src/assets/imagen2.jpeg" class="slide" alt="Pastel decoración">
+                        <img src="src/assets/imagen4.jpeg" class="slide" alt="Bebida refrescante">
+                    </div>
+                    
+                    <div class="info-txt">
+                        <h2>La mejor calidad en todos los productos.</h2>
+                        <p>
+                            Puede realizar su pedido con anticipación y recogerlo en la tienda o solicitar la entrega a domicilio.
+                            Ofrecemos opciones personalizadas para eventos especiales como cumpleaños, bodas y reuniones corporativas.
+                        </p>
+                        <a href="#" class="btn-animado">Realizar pedido</a>
+                    </div>
+                </div>
+            </section>
+
+        <!-- alexander -->
+            <!-- PRODUCTOS -->
+            <main class="products container">
+                <h2>Productos</h2>
+                <div class="box-container" id="lista-1">
+                <div class="box" id="producto-1">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Refresco</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 1</p>
+                        <p class="descripcion">Bebida refrescante de sabor único.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="1">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-2">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Torta</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 1</p>
+                        <p class="descripcion">Deliciosa torta casera, ideal para cualquier ocasión.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-3">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Torta de chocolate</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 2</p>
+                        <p class="descripcion">Exquisita torta de chocolate con cobertura de cacao puro.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="3">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-4">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Torta de tres leches</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 2</p>
+                        <p class="descripcion">Torta suave y húmeda con mezcla de tres tipos de leche.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+                    </div>
+                </div>
+        
+                        <div class="box" id="producto-5">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Refresco</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 1</p>
+                        <p class="descripcion">Bebida refrescante de sabor único.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="5">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-6">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Torta</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 1</p>
+                        <p class="descripcion">Deliciosa torta casera, ideal para cualquier ocasión.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="6">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-7">
+                    <img src="src/assets/imagen5.jpeg" alt="">
+                    <div>
+                        <h3>Torta de chocolate</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 2</p>
+                        <p class="descripcion">Exquisita torta de chocolate con cobertura de cacao puro.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="7">Agregar al carrito</a>
+                    </div>
+                </div>
+
+                <div class="box" id="producto-8">
+                    <img src="src/assets/imagen4.jpeg" alt="">
+                    <div>
+                        <h3>Torta de tres leches</h3>
+                        <p>Calidad premium</p>
+                        <p class="precio">$100</p>
+                        <p class="porciones">Porciones: 2</p>
+                        <p class="descripcion">Torta suave y húmeda con mezcla de tres tipos de leche.</p>
+                        <div class="cantidad-control">
+                            <button type="button" class="restar-cantidad" data-id="X">-</button>
+                            <input type="number" min="1" max="10" value="1" class="cantidad" data-id="X" readonly>
+                            <button type="button" class="sumar-cantidad" data-id="X">+</button>
+                        </div>
+                        <a href="#" class="agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+                    </div>
+                </div>
+                
+                </div>
+
+                <div class="btn-2" id="load-more">Cargar Más</div>
+            </main>
+
+
+        <!-- todos -->
+            <!-- DETALLE PRODUCTO -->
+            <section id="detalle-producto" class="detalle-producto container"></section>
+
+            <!-- APP -->
+            <section class="app container">
+                <div class="app-txt">
+                    <h2>Próximamente descubre nuestra nueva App!</h2>
+                    <p>
+                        Se vienen tiempos brillantes descargando la futura App.
+                        Tu pedido con un solo toque y ofertas únicas.
+                        Secretitos online y mucho más.
+                    </p>
+                    <div class="descarga">
+                        <img src="src/assets/store1.png" alt="">
+                        <img src="src/assets/store2.png" alt="">
+                    </div>
+                </div>
+
+                <div class="app-img">
+                    <img src="src/assets/app.png" alt="">
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="footer-content container">
+
+                    <div class="link">
+                        <h3>Sobre Nosotros</h3>
+                        <ul>
+                            <li><a href="#">Trabaja con Nosotros</a></li>
+                            <li><a href="#">Nuestros Valores</a></li>
+                            <li><a href="#">Prensa y Noticias</a></li>
+                            <li><a href="#">Responsabilidad Social</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link">
+                        <h3>Preguntas Frecuentes (FAQ)</h3>
+                        <ul>
+                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Libro de Reclamaciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link">
+                        <h3>Menú Completo</h3>
+                        <ul>
+                            <li><a href="#">Servicio de Catering</a></li>
+                            <li><a href="#">Localiza Nuestras Sucursales</a></li>
+                            <li><a href="#">Programa de Lealtad</a></li>
+                            <li><a href="#">Platos de Temporada</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="link">
+                        <h3>Proximante en estas plataformas!</h3>
+                        <div class="descarga">
+                            <img src="src/assets/store1.png" alt="">
+                            <img src="src/assets/store2.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </footer>
+
+
+
+            <!-- SCRIPT -->
+            <script src="src/js/scritp.js"></script>
+
+
+
+        </body>
+
+        </html>

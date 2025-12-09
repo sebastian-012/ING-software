@@ -1,0 +1,130 @@
+// Contenedor general
+.container {
+  max-width: 1200px; // Ancho maximo
+  margin: 0 auto; // Centrar horizontal
+}
+
+// Header principal
+.header {
+  display: flex; // Flex para alinear elementos
+  align-items: center; // Centrar verticalmente
+  min-height: 70vh; // Altura minima
+  position: relative; // Para elementos hijos posicionados
+}
+
+// Menu principal
+.menu {
+  position: absolute; // Posicion absoluta
+  top: 0; left: 0; right: 0; // Arriba y ancho completo
+  display: flex; // Flex para distribuir items
+  align-items: center; // Centrar vertical
+  justify-content: space-between; // Separar elementos
+  padding: 14px 30px; // Relleno interno
+  z-index: 1000; // Encima de otros elementos
+
+  label {
+    cursor: pointer; // Cursor puntero
+    display: none; // Oculto por defecto
+  }
+}
+
+// Logo
+.logo {
+  display: inline-flex; // Flex en linea
+  align-items: center; // Centrar vertical
+  justify-content: center; // Centrar horizontal
+  gap: 8px; // Espacio entre elementos
+  text-decoration: none; // Sin subrayado
+  padding: 2px 0; // Relleno vertical
+
+  &-img {
+    width: 120px; height: 120px; // Tamaño del logo
+    object-fit: cover; // Ajusta imagen sin deformar
+    border-radius: 50%; // Circular
+    display: block;
+    filter: sepia(100%) hue-rotate(320deg) saturate(90%) brightness(0.8); // Efecto de color
+    @include box-shadow(0 6px 18px rgba(0,0,0,0.18)); // Sombra
+  }
+}
+
+// Lista de navegacion
+.nav-list {
+  display: flex; // Flex para items
+  gap: 28px; // Espacio entre links
+  align-items: center; // Centrar vertical
+  margin: 0; padding: 0; // Sin margen ni padding
+}
+
+.nav-item { list-style: none; } // Sin viñetas
+
+// Links de navegacion
+.nav-link {
+  display: inline-flex; // Flex en linea
+  align-items: center; // Centrar vertical
+  gap: 10px; // Espacio entre icono y texto
+  padding: 10px 6px; // Relleno interno
+  color: $color-black; // Color negro
+  font-weight: 700; // Negrita
+  font-size: 16px; // Tamaño de fuente
+  position: relative; // Para pseudo-elementos
+  text-transform: uppercase; // Mayusculas
+  letter-spacing: 0.6px; // Espaciado de letras
+  transition: color 0.18s ease, transform 0.18s ease; // Transicion de color y transform
+
+  &::after {
+    content: ''; // Pseudo-elemento decorativo
+    position: absolute; // Posicion absoluta
+    left: 10%; right: 10%; // Margen horizontal
+    bottom: -8px; // Debajo del link
+    height: 3px; // Grosor de linea
+    background: transparent; // Fondo inicial
+    border-radius: 6px; // Bordes redondeados
+    transform: scaleX(0); // Oculto horizontalmente
+    transform-origin: center; // Punto de origen
+    transition: all 0.25s ease; // Transicion
+  }
+
+  .nav-ico {
+    font-size: 20px; // Tamaño icono
+    color: #ff6b5e; // Color icono
+    display: inline-flex;
+    width: 26px; 
+    justify-content: center;
+  }
+
+  .nav-txt { display: inline-block; }
+}
+
+// Efectos al hover o activo
+.nav-item:hover .nav-link::after,
+.nav-item.active .nav-link::after {
+  background: #ff6b5e; // Color de linea
+  transform: scaleX(1); // Mostrar linea
+}
+
+.nav-item:hover .nav-link {
+  color: #ff6b5e; // Cambia color
+  transform: translateY(-2px); // Elevar link
+}
+
+// Submenu (ej: carrito)
+.submenu {
+  display: flex; // Flex para items
+  align-items: center; // Centrar vertical
+  gap: 15px; // Espacio entre elementos
+  position: relative; // Para submenu absoluto
+
+  #carrito { display: none; } // Oculto por defecto
+  &:hover #carrito { 
+    display: block; // Mostrar al hover
+    position: absolute; // Posicion absoluta
+    right: 0; top: 100%; // Debajo del submenu
+    backdrop-filter: blur(10px); // Desenfoque de fondo
+    background: $color-white; // Fondo blanco
+    padding: 20px; // Relleno
+    min-width: 400px; // Ancho minimo
+    @include box-shadow($shadow-heavy); // Sombra intensa
+    text-align: center; // Centrar texto
+  }
+}
+

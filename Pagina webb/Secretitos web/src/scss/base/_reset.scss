@@ -1,0 +1,20 @@
+/* Importa la fuente Poppins desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Importa un archivo de variables CSS/SCSS */
+@import 'variables';
+
+/* Aplica estilos globales a todos los elementos */
+* {
+  margin: 0; /* Quita margenes por defecto */
+  padding: 0; /* Quita rellenos por defecto */
+  box-sizing: border-box; /* Incluye borde y padding en el tamaño del elemento */
+  text-decoration: none; /* Quita subrayados de enlaces */
+  list-style: none; /* Quita viñetas de listas */
+}
+
+/* Estilos del cuerpo de la pagina */
+body {
+  font-family: $font-primary; /* Aplica la fuente principal definida en variables */
+  background: $color-bg; /* Aplica el color de fondo definido en variables */
+}

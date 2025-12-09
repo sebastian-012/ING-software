@@ -1,0 +1,73 @@
+// Contenedor del buscador
+.search-container {
+  position: relative; // Permite posicionar sugerencias absolutas
+  width: 320px; // Ancho del buscador
+  margin: 10px 0; // Margen vertical
+  float: left; // Flotante a la izquierda
+
+  // Campo de texto
+  input[type="text"] {
+    width: 100%; // Ancho completo
+    padding: 12px 18px; // Relleno interno
+    font-size: 16px; // Tamaño de fuente
+    border-radius: 30px; // Bordes redondeados
+    border: 1px solid rgba(0,0,0,0.08); // Borde ligero
+    outline: none; // Quita borde al enfocar
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06); // Sombra ligera
+  }
+}
+
+// Contenedor de sugerencias
+.suggestions {
+  position: absolute; // Posicion absoluta respecto al buscador
+  top: 45px; // Debajo del input
+  left: 0; // Alineado a la izquierda
+  width: 100%; // Mismo ancho que input
+  background-color: #fff; // Fondo blanco
+  border: 1px solid #ccc; // Borde gris
+  border-radius: 8px; // Bordes redondeados
+  max-height: 300px; // Altura maxima
+  overflow-y: auto; // Scroll vertical si hay overflow
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); // Sombra ligera
+  display: none; // Oculto por defecto
+  z-index: 1000; // Encima de otros elementos
+
+  // Cada elemento de sugerencia
+  .suggestion-item {
+    display: flex; // Flex para imagen y texto
+    align-items: center; // Centrar verticalmente
+    padding: 5px 10px; // Relleno interno
+    gap: 10px; // Espacio entre imagen y texto
+    cursor: pointer; // Cursor puntero
+
+    // Imagen de la sugerencia
+    img {
+      width: 40px; height: 40px; // Tamaño fijo
+      object-fit: cover; // Ajusta imagen sin deformar
+      border-radius: 5px; // Bordes redondeados
+    }
+
+    // Contenedor de texto de la sugerencia
+    div {
+      display: flex;
+      flex-direction: column; // Texto en columna
+
+      h4 {
+        margin: 0; // Sin margen
+        font-size: 14px; // Tamaño de fuente
+        color: #333; // Color gris oscuro
+      }
+
+      p {
+        margin: 0; // Sin margen
+        font-size: 12px; // Fuente mas pequena
+        font-weight: bold; // Negrita
+        color: #e74c3c; // Color rojo
+      }
+    }
+
+    &:hover {
+      background-color: #f0f0f0; // Fondo gris al pasar mouse
+    }
+  }
+}

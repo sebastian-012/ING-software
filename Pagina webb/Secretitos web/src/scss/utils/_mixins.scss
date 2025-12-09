@@ -1,0 +1,19 @@
+// Mixin para media query
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $breakpoint-mobile) { // Aplica estilos para pantallas menores al breakpoint mobile
+      @content; // Inserta el contenido dentro de la media query
+    }
+  }
+}
+
+// Mixin para hover con transicion
+@mixin hover($property, $value, $duration: 0.3s) {
+  transition: $property $duration ease; // Transicion para la propiedad indicada
+  &:hover { #{$property}: $value; } // Aplica valor al pasar el mouse
+}
+
+// Mixin para sombra de caja
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow; // Aplica sombra pasada como parametro
+}

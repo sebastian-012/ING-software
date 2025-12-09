@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-header">
+        <h1>Panel de Administrador</h1>
+        <button id="logoutAdmin">Cerrar sesión</button>
+    </div>
+
+    <h2>Usuarios Registrados</h2>
+    <table class="tabla" id="tablaUsuarios">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Compras por Usuario</h2>
+    <table class="tabla" id="tablaCompras">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Total</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="admin.js"></script>
+</body>
+</html>

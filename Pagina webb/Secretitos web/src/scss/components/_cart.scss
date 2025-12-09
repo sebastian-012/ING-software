@@ -1,0 +1,82 @@
+// Contenedor general del carrito
+.cart-container { 
+  position: relative; // Permite posicionar elementos hijos de forma absoluta
+}
+
+// Wrapper del carrito
+.cart-wrapper { 
+  position: relative; // Permite posicionar elementos hijos de forma absoluta
+  display: inline-block; // Se muestra en linea pero con propiedades de bloque
+}
+
+// Indicador de cantidad de productos en el carrito
+.cart-count {
+  position: absolute; // Posicion absoluta respecto al wrapper
+  top: -6px; right: -6px; // Ubicacion encima y a la derecha
+  background: #ff9a2e; // Fondo naranja
+  color: $color-white; // Texto blanco
+  width: 26px; height: 26px; // Tamaño del circulo
+  border-radius: 50%; // Circulo
+  display: inline-flex; // Flex para centrar contenido
+  align-items: center; justify-content: center; // Centrar numero dentro del circulo
+  font-weight: 700; // Negrita
+  @include box-shadow($shadow-light); // Sombra ligera
+}
+
+// Tarjeta desplegable del carrito
+.cart-card {
+  display: none; // Oculta por defecto
+  position: absolute; // Posicion absoluta
+  right: -10px; top: 48px; // Ubicacion debajo del carrito
+  width: 720px; // Ancho fijo
+  max-width: calc(100vw - 40px); // No excede ancho de pantalla
+  background: $color-white; // Fondo blanco
+  border-radius: 12px; // Bordes redondeados
+  overflow: hidden; // Oculta contenido que se salga
+  @include box-shadow($shadow-heavy); // Sombra intensa
+  text-align: left; // Texto alineado a la izquierda
+  color: #222; // Color de texto
+
+  // Encabezado de la tarjeta
+  .cart-header {
+    background: $color-red-dark; // Fondo rojo oscuro
+    color: $color-white; // Texto blanco
+    padding: 18px 22px; // Relleno
+    h3 { margin: 0; font-size: 20px; } // Titulo sin margen
+  }
+
+  // Cuerpo de la tarjeta con productos
+  .cart-body {
+    padding: 12px 18px; // Relleno interno
+    max-height: 300px; // Altura maxima
+    overflow-y: auto; // Scroll vertical si hay overflow
+
+    table { width: 100%; border-collapse: collapse; } // Tabla ocupa todo ancho
+    th, td { padding: 10px; text-align: left; vertical-align: middle; font-size: 14px; color: black; font-weight: 700; } // Estilos de celdas
+    thead th { background: $color-white; color: #333; font-weight: 700; border-bottom: 1px solid #eee; } // Encabezado de tabla
+    tbody tr { border-bottom: 1px solid $color-gray-bg; } // Filas separadas
+    img { width: 70px; height: 50px; object-fit: cover; border-radius: 6px; } // Imagen de producto
+  }
+
+  // Pie de la tarjeta con total y boton
+  .cart-footer {
+    padding: 16px 22px 22px 22px; // Relleno interno
+    display: flex; // Flex para distribucion horizontal
+    align-items: center; justify-content: space-between; // Alinear y separar elementos
+    gap: 12px; // Espacio entre elementos
+
+    .cart-total { font-weight: 800; color: #d35400; font-size: 18px; } // Total de carrito
+    .vaciar-large { 
+      background: $color-red-dark; // Fondo rojo oscuro
+      color: $color-white; // Texto blanco
+      padding: 12px 22px; // Relleno
+      border-radius: 12px; // Bordes redondeados
+      display: inline-block; 
+      text-decoration: none; 
+      @include hover(background, #8a0b0b); // Cambio de fondo al hover
+    }
+  }
+}
+
+// Muestra la tarjeta al pasar el mouse sobre el submenu
+.submenu:hover .cart-card { display: block; }

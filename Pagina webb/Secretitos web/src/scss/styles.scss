@@ -1,0 +1,99 @@
+// Base
+@import 'base/variables';
+@import 'base/reset';
+
+// Utils
+@import 'utils/mixins';
+
+// Layout
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/app';
+
+// Components
+@import 'components/buttons';
+@import 'components/modal';
+@import 'components/cart';
+@import 'components/slider';
+@import 'components/cards';
+@import 'components/search';
+
+// Pages
+@import 'pages/home';
+
+
+
+#img-carrito {
+    width: 50px;   /* ancho */
+    height: 50px;  /* alto */
+}
+
+
+
+// Animaciones (siempre aplican, no dependen de responsive)
+@keyframes slideInLeft {
+    from { transform: translateX(-12px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(12px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+// Estilos por defecto
+.menu label {
+    display: none; // Oculto en escritorio
+    cursor: pointer;
+}
+
+// Responsive para movil
+@include respond(mobile) {
+    // Mostrar checkbox para toggle
+    #menu {
+        display: block;
+    }
+
+    // Icono hamburguesa
+    .menu label {
+        display: block;
+        cursor: pointer;
+    }
+
+    .menu-icono {
+        width: 25px; // Ajuste tamaño icono
+    }
+
+    // Nav lista oculta por defecto
+    .nav-list {
+        display: none;
+        flex-direction: column; 
+        gap: 12px;
+        width: 100%;
+        background: $color-white;
+        position: absolute;
+        top: 70px; 
+        left: 0;
+        padding: 10px 0;
+        box-shadow: $shadow-medium;
+    }
+
+    // Mostrar nav lista al activar checkbox
+    #menu:checked ~ .navbar .nav-list {
+        display: flex;
+    }
+}
+
+// Por defecto (escritorio) oculto
+.header input[type="checkbox"] {
+  display: none; // no aparece en pc
+}
+
+// En movil (responsive) lo mostramos
+@include respond(mobile) {
+  .header input[type="checkbox"] {
+    display: none !important;
+    margin-right: 8px; // separacion del texto "Inicio"
+    vertical-align: middle;
+  }
+}

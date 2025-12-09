@@ -1,0 +1,137 @@
+// Estilos responsivos para dispositivos moviles
+@include respond(mobile) {
+  .actions { 
+    flex-direction: column; // Columna en vez de fila
+    align-items: stretch; // Estirar elementos
+    gap: 12px; // Espacio entre elementos
+  }
+  .search-container { width: 100%; } // Buscador ancho completo
+
+  .header-content { 
+    padding: 100px 30px 30px 30px; 
+    flex-direction: column; // Columna
+  }
+  .header-txt { 
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 25px; 
+  }
+  .header-img { width: 100%; text-align: center; }
+  .header-img img { width: 300px; }
+
+  .box-detalle img { width: 250px; margin-bottom: 15px; }
+  .box-detalle div { align-items: center; text-align: center; }
+
+  .breakfast-content { flex-direction: column; align-items: center; }
+  .info-content { flex-direction: column; }
+  .info-img img { width: 250px; margin-left: 0; }
+  .info-txt { width: 100%; text-align: center; }
+
+  .app { flex-direction: column; padding: 30px; }
+  .app-txt { width: 100%; text-align: center; }
+  .descarga { flex-direction: column; align-items: center; }
+  .app-img img { width: 300px; }
+
+  .footer { padding: 30px; }
+  .footer-content { flex-direction: column; align-items: center; text-align: center; }
+
+  .slider-container { width: 100%; max-width: 300px; height: 300px; }
+}
+
+// Fondo decorativo principal
+.bg {
+  position: absolute; // Posicion absoluta
+  width: 100%; // Ancho completo
+  max-width: 700px; // Maximo ancho
+  height: auto; // Altura automática
+  top: 0; right: 0; // Arriba derecha
+  z-index: -1; // Detrás de contenido
+}
+
+
+// Fondo secundario para seccion info
+.bg-2 {
+  position: absolute;
+  width: 300px; 
+  z-index: -1; 
+  top: 50px; 
+}
+
+// Contenido principal del header
+.header-content {
+  display: flex; 
+  align-items: center; 
+  margin-top: 80px;
+
+  .header-txt {
+    width: 50%; 
+    margin-right: 50px;
+
+    h1 {
+      font-size: 55px; 
+      line-height: 65px; 
+      color: #4E342E; 
+      margin-bottom: 35px;
+    }
+
+    p {
+      font-size: 16px; 
+      color: #5D4037; 
+      margin-bottom: 45px;
+
+      span { color: #900C3F; } // Destacar texto
+    }
+  }
+
+  .header-img {
+    width: 50%; 
+    text-align: right;
+
+    img {
+      width: 500px;
+      transform-origin: center center; // Centro para animacion
+      animation: breathe 6s ease-in-out infinite; // Animacion de respiracion
+
+      &:hover { animation-play-state: paused; } // Pausar al hover
+    }
+  }
+}
+
+
+// Animacion breathe para header-img
+@keyframes breathe {
+  0% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-6px) scale(1.02); }
+  65% { transform: translateY(4px) scale(0.995); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+// Ajustes responsivos adicionales para moviles
+@include respond(mobile) {
+  .bg { display: none; } // Ocultar fondo
+  .bg-2 { display: none; } // Ocultar fondo secundario
+
+  .header-content {
+    flex-direction: column; // Columna
+    padding: 100px 30px 30px 30px;
+
+    .header-txt {
+      width: 100%; 
+      margin: 0 0 25px 0; 
+      text-align: center;
+
+      h1 { font-size: 45px; line-height: 55px; margin-bottom: 20px; } // Ajuste tamaño titulo
+    }
+
+    .header-img {
+      width: 100%; 
+      text-align: center;
+
+      img { width: 300px; } // Ajuste tamaño imagen
+    }
+  }
+}
+
+
+
+

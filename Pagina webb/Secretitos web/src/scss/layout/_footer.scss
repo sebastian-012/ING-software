@@ -1,0 +1,26 @@
+// Seccion del footer
+.footer {
+  padding: 50px 0; // Relleno vertical
+  background-color: $color-orange; // Fondo naranja
+
+  // Contenido interno del footer
+  &-content {
+    display: flex; // Flex para organizar secciones
+    justify-content: space-between; // Espacio entre elementos
+  }
+
+  // Enlaces del footer
+  .link {
+    h3 { 
+      font-size: 18px; // Tamaño de titulo
+      margin-bottom: 15px; // Margen inferior
+      color: $color-white; // Texto blanco
+    }
+    a { 
+      color: $color-white; // Texto blanco
+      font-size: 16px; // Tamaño de fuente
+      display: block; // Bloque para margen inferior
+      margin-bottom: 10px; // Margen inferior
+    }
+  }
+}

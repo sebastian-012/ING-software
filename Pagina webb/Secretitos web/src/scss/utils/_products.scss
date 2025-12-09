@@ -1,0 +1,47 @@
+// Contenedor de cajas
+.box-container {
+  display: grid; // Grid para organizar las cajas
+  grid-template-columns: repeat(auto-fit,minmax(250px, 1fr)); // Columnas autoajustables
+  gap: 20px; // Espacio entre cajas
+  margin-top: 50px; // Margen superior
+
+  // Cada caja individual
+  .box {
+    background-color: $secondary-color; // Fondo de la caja
+    color: $white; // Color de texto
+    padding: 20px; // Relleno interno
+    @include rounded(15px); // Bordes redondeados
+    box-shadow: $shadow-card; // Sombra de la caja
+    transition: all 0.3s ease; // Transicion suave
+    display: none; // Oculto por defecto
+
+    &:hover {
+      transform: translateY(-5px); // Elevar caja al pasar mouse
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2); // Sombra mas intensa al hover
+    }
+
+    // Imagen dentro de la caja
+    img {
+      width: 100%; // Ancho completo
+      max-width: 200px; // Maximo ancho
+      height: 180px; // Altura fija
+      object-fit: cover; // Ajustar sin deformar
+      @include rounded(10px); // Bordes redondeados
+      margin-bottom: 15px; // Margen inferior
+    }
+
+    // Precio del producto
+    .precio {
+      font-size: 20px; // Tamaño de fuente
+      font-weight: 800; // Negrita
+      color: $primary-color; // Color principal
+      margin-top: 10px; // Margen superior
+    }
+
+    // Boton dentro de la caja
+    .btn-3 { 
+      width: fit-content; // Ajusta ancho al contenido
+      margin-top: 10px; // Margen superior
+    }
+  }
+}

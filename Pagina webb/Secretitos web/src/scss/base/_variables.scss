@@ -1,0 +1,30 @@
+// Fuentes
+$font-primary: 'Poppins', sans-serif; // Define la fuente principal de la pagina
+
+// Colores
+$color-white: #fff; // Blanco
+$color-black: #1D1D18; // Negro oscuro
+$color-bg: #FFF5E1; // Color de fondo principal
+$color-red-dark: #720606; // Rojo oscuro
+$color-red: #900C3F; // Rojo normal
+$color-orange: #FF9000; // Naranja
+$color-orange-hover: #EF8700; // Naranja para efecto hover
+$color-pink: #cc007e; // Rosa
+$color-shadow: rgba(0,0,0,0.3); // Color de sombra general
+$color-gray-light: rgba(0,0,0,0.08); // Gris claro transparente
+$color-gray: #ccc; // Gris medio
+$color-gray-bg: #f0f0f0; // Fondo gris claro
+
+// Bordes y radios
+$radius-small: 6px; // Radio de borde pequeno
+$radius-medium: 10px; // Radio de borde medio
+$radius-large: 28px; // Radio de borde grande
+$radius-xl: 50px; // Radio de borde extra grande
+
+// Sombras
+$shadow-light: 0 2px 6px rgba(0,0,0,0.2); // Sombra ligera
+$shadow-medium: 0 6px 16px rgba(0,0,0,0.3); // Sombra media
+$shadow-heavy: 0 10px 30px rgba(0,0,0,0.25); // Sombra pesada
+
+// Breakpoints
+$breakpoint-mobile: 991px; // Punto de quiebre para dispositivos moviles

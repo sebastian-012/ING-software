@@ -1,0 +1,159 @@
+// Seccion de productos
+.products {
+  padding: 0 0 50px; // Relleno inferior
+  text-align: center; // Centrar contenido horizontalmente
+
+  // Contenedor de cajas de productos
+  .box-container {
+    margin-top: 55px; // Margen superior
+    display: grid; // Distribucion en grilla
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Columnas adaptables
+    gap: 20px; // Espacio entre cajas
+
+    // Cada caja de producto
+    .box {
+      display: none; // Oculta por defecto
+      flex-direction: column; // Contenido en columna
+      border-radius: 15px; // Bordes redondeados
+      padding: 20px; // Relleno interno
+      background-color: $color-red; // Fondo rojo
+      color: $color-white; // Color del texto
+      @include box-shadow(0 4px 12px rgba(0,0,0,0.15)); // Sombra inicial
+      transition: all 0.3s ease; // Transicion para animaciones
+      z-index: 1000; // Prioridad sobre otros elementos
+
+      &:hover {
+        transform: translateY(-5px); // Eleva la caja
+        @include box-shadow(0 8px 20px rgba(0,0,0,0.2)); // Sombra mas intensa
+      }
+
+      // Imagen del producto
+      img {
+        width: 100%; // Ancho completo
+        max-width: 200px; // Ancho maximo
+        height: 180px; // Altura fija
+        object-fit: cover; // Ajusta imagen sin deformar
+        border-radius: 10px; // Bordes redondeados
+        margin-bottom: 15px; // Margen inferior
+        align-self: center; // Centrar horizontalmente
+      }
+
+      // Contenedor de texto
+      div {
+        display: flex;
+        flex-direction: column; // Texto en columna
+        justify-content: space-between; // Espacio entre elementos
+        text-align: left; // Texto alineado a la izquierda
+
+        h3 { font-size: 22px; margin-bottom: 10px; } // Titulo del producto
+        p { font-size: 16px; margin-bottom: 8px; } // Descripcion
+      }
+
+      // Boton dentro de la caja
+      .btn-3 { 
+        width: fit-content; // Ancho ajustado al contenido
+        text-align: center; // Centrar texto
+        padding: 10px; // Relleno
+        margin-top: 10px; // Margen superior
+        border-radius: $radius-medium; // Bordes medianos
+      }
+
+      // Precio del producto
+      .precio {
+        font-size: 15px; // Tamaño de fuente
+        color: $color-black; // Color negro
+        font-weight: bold; // Fuente en negrita
+        margin-top: 10px; // Margen superior
+      }
+
+      // Selector de cantidad
+      .cantidad-control {
+        display: flex !important; // Mostrar como flex
+        flex-direction: row !important; // Elementos en fila
+        align-items: center; // Centrar verticalmente
+        justify-content: space-between; // Espacio entre botones
+        background-color: darken($color-red, 10%); // Fondo rojo mas oscuro
+        border-radius: $radius-xl; // Bordes redondeados
+        padding: 4px 6px; // Relleno interno
+        margin: 15px 0; // Margen vertical
+        width: 120px; // Ancho fijo
+        border: 1px solid lighten($color-red, 5%); // Borde ligeramente mas claro
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); // Sombra interna
+
+        // Botones de suma y resta
+        button {
+          background-color: transparent; // Sin fondo
+          color: $color-white; // Texto blanco
+          border: none; // Sin borde
+          width: 32px; height: 32px; // Tamaño cuadrado
+          border-radius: 50%; // Circular
+          font-size: 1.2rem; font-weight: bold; // Fuente en negrita
+          cursor: pointer; // Cambia cursor
+          display: flex; align-items: center; justify-content: center; // Centrado
+          transition: all 0.2s ease; // Transicion de animacion
+          line-height: 0; padding-bottom: 3px;
+
+          &:hover {
+            background-color: $color-white; // Fondo blanco al hover
+            color: $color-red; // Texto rojo
+            transform: scale(1.1); // Aumenta tamaño
+            @include box-shadow(0 0 8px rgba(255,255,255,0.6)); // Sombra blanca
+          }
+        }
+
+        // Campo que muestra la cantidad
+        .cantidad {
+          width: 40px; // Ancho fijo
+          background-color: transparent; // Fondo transparente
+          border: none; // Sin borde
+          color: $color-white; // Texto blanco
+          font-size: 1.2rem; // Tamaño de fuente
+          font-weight: 700; // Fuente en negrita
+          text-align: center; // Centrar texto
+          outline: none; // Sin contorno
+          appearance: none; // Quita estilo nativo
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } // Quita flechas del input
+        }
+      }
+    }
+
+    // Mostrar las primeras 4 cajas
+    .box:nth-child(-n+4) { display: inline-block; }
+  }
+}
+
+// Tarjetas de desayuno
+.breakfast-content {
+  display: grid; // Distribucion en grilla
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); // Columnas adaptables
+  gap: 25px; // Espacio entre tarjetas
+  padding: 20px 0; // Relleno vertical
+
+  .breakfast-card {
+    background: $color-red; // Fondo rojo
+    color: $color-white; // Texto blanco
+    border-radius: 18px; // Bordes redondeados
+    text-align: center; // Centrar texto
+    padding: 15px; // Relleno interno
+    cursor: pointer; // Cursor puntero
+    transition: transform .3s ease, box-shadow .3s ease; // Transicion
+    @include box-shadow(0px 3px 10px rgba(0,0,0,0.3)); // Sombra inicial
+
+    // Imagen de la tarjeta
+    img {
+      width: 80%; // Ancho relativo
+      height: 120px; // Altura fija
+      border-radius: 14px; // Bordes redondeados
+      object-fit: cover; // Ajusta imagen sin deformar
+    }
+
+    &:hover {
+      transform: translateY(-8px) scale(1.03); // Eleva y escala tarjeta
+      @include box-shadow(0px 8px 20px rgba(0,0,0,0.4)); // Sombra mas intensa
+    }
+  }
+}
