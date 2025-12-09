@@ -418,16 +418,7 @@ if (finalizarCompraBtn) {
 
 // Drawer del carrito (abrir/cerrar con overlay)
 const cartWrapper = document.querySelector('.cart-wrapper');
-let cartCard = document.getElementById('carrito');
-
-// Asegurar que el drawer esté como hijo directo de <body> para evitar que
-// ancestros con `transform`/overflow recorten su área (fixed se comporta mal
-// cuando un ancestro crea un nuevo contenedor de composición).
-if (cartCard && cartCard.parentElement !== document.body) {
-    document.body.appendChild(cartCard);
-    // re-asignar referencia por si cambia
-    cartCard = document.getElementById('carrito');
-}
+const cartCard = document.getElementById('carrito');
 
 function closeCartDrawer() {
     if (cartCard) cartCard.classList.remove('open');
@@ -456,8 +447,6 @@ if (cartWrapper && cartCard) {
         if (cartCard.classList.contains('open')) closeCartDrawer();
         else openCartDrawer();
     });
-
-    // No abrir en hover: solo comportamiento por click (requerimiento del usuario).
 }
 
 // botón cerrar dentro del drawer (si existe la clase cerrar)
