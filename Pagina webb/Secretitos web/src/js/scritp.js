@@ -327,6 +327,143 @@ if (lista) {
 }
 if (vaciarCarritoBtn) vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 
+// Botones adicionales del carrito (VER / FINALIZAR)
+const verCarritoBtn = document.getElementById('ver-carrito');
+const finalizarCompraBtn = document.getElementById('finalizar-compra');
+
+// Función utilitaria: modal global reutilizable (usa #global-modal)
+function showModal(title, htmlContent, buttons = [{ label: 'Cerrar', value: 'close', className: 'btn-modal-cancel' }]) {
+    return new Promise(resolve => {
+        const container = document.getElementById('global-modal');
+        if (!container) {
+            // fallback a alert
+            alert(title + '\n' + (typeof htmlContent === 'string' ? htmlContent.replace(/<[^>]+>/g, '') : ''));
+            resolve(null);
+            return;
+        }
+        const btnsHtml = buttons.map((b, i) => `<button data-val="${b.value}" class="${b.className || ''}">${b.label}</button>`).join('');
+        container.innerHTML = `
+            <div class="modal-overlay">
+              <div class="modal" role="dialog" aria-modal="true">
+                <h3>${title}</h3>
+                <div class="modal-body">${htmlContent}</div>
+                <div class="modal-actions">${btnsHtml}</div>
+              </div>
+            </div>
+        `;
+        container.style.display = 'block';
+
+        const overlay = container.querySelector('.modal-overlay');
+        const actionButtons = container.querySelectorAll('.modal-actions button');
+
+        function cleanup(val) {
+            container.innerHTML = '';
+            container.style.display = 'none';
+            resolve(val);
+        }
+
+        // cerrar si clic fuera de modal
+        overlay.addEventListener('click', (ev) => {
+            if (ev.target === overlay) cleanup(null);
+        });
+
+        actionButtons.forEach(btn => btn.addEventListener('click', (e) => {
+            const v = e.currentTarget.getAttribute('data-val');
+            cleanup(v);
+        }));
+    });
+}
+
+function renderCartSummaryHtml() {
+    if (!carritoItems || carritoItems.length === 0) return '<p>Tu carrito está vacío.</p>';
+    const rows = carritoItems.map(it => {
+        const subtotal = (Number(it.precio) * Number(it.cantidad)).toFixed(2);
+        return `<div style="display:flex;gap:12px;align-items:center;margin-bottom:8px;"><img src="${it.imagen}" style="width:56px;height:40px;object-fit:cover;border-radius:6px;"><div style="flex:1"><strong>${it.titulo}</strong><div style='font-size:13px;color:#666;'>Cantidad: ${it.cantidad}</div></div><div style='font-weight:700;'>S/ ${subtotal}</div></div>`;
+    }).join('');
+    const total = carritoItems.reduce((s,it)=> s + (Number(it.precio) * Number(it.cantidad)), 0).toFixed(2);
+    return `${rows}<div style="border-top:1px solid #eee;padding-top:10px;margin-top:8px;display:flex;justify-content:space-between;"><strong>Total parcial</strong><strong>S/ ${total}</strong></div>`;
+}
+
+if (verCarritoBtn) {
+    verCarritoBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!carritoItems || carritoItems.length === 0) {
+            await showModal('Carrito vacío', '<p>No hay productos en el carrito.</p>', [{ label: 'Cerrar', value: 'close', className: 'btn-modal-cancel' }]);
+            return;
+        }
+        const content = renderCartSummaryHtml();
+        const res = await showModal('Mi carrito', content, [
+            { label: 'Cerrar', value: 'close', className: 'btn-modal-cancel' },
+            { label: 'Finalizar compra', value: 'finalizar', className: 'btn-modal-confirm' }
+        ]);
+        if (res === 'finalizar') {
+            // reutilizar flujo de finalizar
+            if (!currentUser) { mostrarLogin(); return; }
+            await showModal('Finalizar compra', '<p>Flujo de pago no implementado aún.</p>', [{ label: 'OK', value: 'ok', className: 'btn-modal-confirm' }]);
+        }
+    });
+}
+
+if (finalizarCompraBtn) {
+    finalizarCompraBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!carritoItems || carritoItems.length === 0) {
+            await showModal('Carrito vacío', '<p>Agrega productos antes de finalizar la compra.</p>', [{ label: 'Cerrar', value: 'close', className: 'btn-modal-cancel' }]);
+            return;
+        }
+        if (!currentUser) { mostrarLogin(); return; }
+        await showModal('Finalizar compra', '<p>Flujo de pago no implementado aún.</p>', [{ label: 'OK', value: 'ok', className: 'btn-modal-confirm' }]);
+    });
+}
+
+// Drawer del carrito (abrir/cerrar con overlay)
+const cartWrapper = document.querySelector('.cart-wrapper');
+let cartCard = document.getElementById('carrito');
+
+// Asegurar que el drawer esté como hijo directo de <body> para evitar que
+// ancestros con `transform`/overflow recorten su área (fixed se comporta mal
+// cuando un ancestro crea un nuevo contenedor de composición).
+if (cartCard && cartCard.parentElement !== document.body) {
+    document.body.appendChild(cartCard);
+    // re-asignar referencia por si cambia
+    cartCard = document.getElementById('carrito');
+}
+
+function closeCartDrawer() {
+    if (cartCard) cartCard.classList.remove('open');
+    const overlay = document.getElementById('cart-overlay');
+    if (overlay) overlay.remove();
+}
+
+function openCartDrawer() {
+    if (cartCard) cartCard.classList.add('open');
+    // crear overlay
+    if (!document.getElementById('cart-overlay')) {
+        const ov = document.createElement('div');
+        ov.id = 'cart-overlay';
+        ov.style.position = 'fixed';
+        ov.style.inset = '0';
+        ov.style.background = 'rgba(0,0,0,0.45)';
+        ov.style.zIndex = '1000';
+        ov.addEventListener('click', closeCartDrawer);
+        document.body.appendChild(ov);
+    }
+}
+
+if (cartWrapper && cartCard) {
+    cartWrapper.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (cartCard.classList.contains('open')) closeCartDrawer();
+        else openCartDrawer();
+    });
+
+    // No abrir en hover: solo comportamiento por click (requerimiento del usuario).
+}
+
+// botón cerrar dentro del drawer (si existe la clase cerrar)
+const cerrarDrawerBtn = cartCard ? cartCard.querySelector('.cerrar') : null;
+if (cerrarDrawerBtn) cerrarDrawerBtn.addEventListener('click', (e) => { e.preventDefault(); closeCartDrawer(); });
+
 // =================== BUSCADOR ===================
 if (searchInput && suggestions) {
     searchInput.addEventListener('input', () => {

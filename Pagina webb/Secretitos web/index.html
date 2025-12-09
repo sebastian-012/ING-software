@@ -69,8 +69,12 @@
                                     </table>
                                 </div>
                                 <div class="cart-footer">
-                                    <div class="cart-total">Total: <span id="cart-total">$0.00</span></div>
-                                    <a href="#" id="vaciar-carrito" class="btn-3 vaciar-large">Vaciar Carrito</a>
+                                    <div class="cart-total">Total: <span id="cart-total">S/ 0.00</span></div>
+                                    <div class="cart-actions">
+                                        <a href="#" id="ver-carrito" class="btn-ver">VER CARRITO</a>
+                                        <a href="#" id="finalizar-compra" class="btn-cta">FINALIZAR COMPRA</a>
+                                        <a href="#" id="vaciar-carrito" class="btn-3 vaciar-large">Vaciar Carrito</a>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -439,7 +443,8 @@
             <!-- SCRIPT -->
             <script src="src/js/scritp.js"></script>
 
-
+            <!-- Modal global (contenedor dinámico) -->
+            <div id="global-modal" style="display:none;"></div>
 
         </body>
 
